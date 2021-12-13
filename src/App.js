@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+
+/* Importing react router so we can have multiple pages */
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import { SocialMediaHomePage } from './components/pages/SocialMediaHomePage';
+import { LoginPage } from './components/pages/LoginPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <SocialMediaHomePage />
+        </Route>
+        <Route exact path="/me">
+          <div>Me</div>
+        </Route>
+        <Route path="/login">
+          <LoginPage/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
