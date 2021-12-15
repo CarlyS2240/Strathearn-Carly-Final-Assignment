@@ -28,8 +28,6 @@ export const MePage = () => {
             onAuthStateChanged(auth, (user) => {
                 if (!user){
                     history.push('/login');
-                }else {
-                    setSearchString(user.email);
                 }
             })
         }, []
@@ -44,7 +42,7 @@ export const MePage = () => {
     useEffect (
         () => {
             handlePostsByEmail();
-        }, [searchString]
+        }, [posts]
     )
 
     const handlePostsByEmail = () => {
@@ -52,26 +50,17 @@ export const MePage = () => {
         //setSearchString(auth.currentUser.email);
         //console.log("setSearchString", auth.currentUser.email);
 
-        if (searchString == '') {
-            setFilteredPosts(posts);
-            return;
-        }
-
         const user = getAuth().currentUser;
         console.log("User", user);
 
            if (user!=null){
+            console.log("im working", posts)
                 //setEmail(auth.currentUser.email);
                 //console.log("User Email", auth.currentUser.email);
             
-                const postsFiltered = posts.filter(
-                    (post) => {
-                        const email = post.email.stringValue;
-                        const isMatch = email.indexOf(searchString);
-                        console.log("isMatch", isMatch);
-                        return isMatch !== -1; 
-                }
-            )
+             const postsFiltered = posts.filter(
+                    (post) => post.email.stringValue === user.email
+             )
             setFilteredPosts(postsFiltered);
             console.log("postsFiltered", postsFiltered);
   
