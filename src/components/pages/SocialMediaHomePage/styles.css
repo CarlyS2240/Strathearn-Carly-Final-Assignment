@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.posts-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.sub-title {
+    font-family: 'Nunito', sans-serif;
+    padding-left: 2.5%;
+    padding-top: 2%;
+    color: #414141;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.title {
+    font-family: 'Nunito', sans-serif;
+    padding-left: 2.5%;
+    padding-top: 0.5%;
+    color: #414141;
+    font-size: 2rem;
+    font-weight: 700;
+}

@@ -11,6 +11,7 @@ import { Navbar } from './components/Navbar';
 import { SocialMediaHomePage } from './components/pages/SocialMediaHomePage';
 import { MePage } from './components/pages/MePage';
 import { LoginPage } from './components/pages/LoginPage';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <LoginPage/>
           </Route>
         </Switch>
+        <Footer />
     </Router>
   );
 }

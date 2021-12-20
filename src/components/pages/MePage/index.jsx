@@ -1,6 +1,7 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form'
 
 import PostsOrderContext from "../../../context/postsOrderContext";
 
@@ -15,11 +16,12 @@ export const MePage = () => {
     const[ filteredPosts, setFilteredPosts ] = useState([]);
     const [ email, setEmail ] = useState('');
 
-    const [searchString, setSearchString] = useState ('');
-
     const globalState = useContext(PostsOrderContext);
 
+    const { register, handleSubmit } = useForm();
+
     const auth = getAuth();
+
 
       //Check if a current user is logged into firebase
       useEffect(
@@ -90,6 +92,43 @@ export const MePage = () => {
 
     }
 
+    const submitPost = async (formVals) => {
+        const user = getAuth().currentUser;
+        const id = Math.floor(Math.random()*90000) + 10000;
+        const idStr = id.toString();
+
+        console.log(idStr);
+        
+        const formattedData = {
+            fields: {
+                email: {
+                    stringValue: user.email
+                },
+                id: {
+                    stringValue: idStr
+                },
+                text: {
+                    stringValue: formVals.text
+                },
+            }
+        }
+
+        console.log(formVals, formattedData);
+        try{
+            const response = await fetch('https://firestore.googleapis.com/v1/projects/social-media-api-itec-4012/databases/(default)/documents/posts',
+            {
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(formattedData)
+            })
+          history.push('/');
+        } catch (error) {
+            console.log("Error", error);
+        }
+    };
+
     return (
         <>  
        <div className="me-page">
@@ -98,7 +137,7 @@ export const MePage = () => {
                 { 
                 /* Mapping the fields from the API to the props that we are passing to the MovieItem component*/
                     filteredPosts.map((post) => (
-                        <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} text={post.text.stringValue} username={post.username.stringValue} email={post.email.stringValue}></SocialMediaItem>
+                        <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} text={post.text.stringValue} email={post.email.stringValue} image={post.image.stringValue}></SocialMediaItem>
                             //<>
                                 //<br/>
                                 ///<div>{post.id.stringValue}</div>
@@ -111,15 +150,24 @@ export const MePage = () => {
                 {
                     
                 }
-
                 {
-                    //loading && <div className="loadOverlay" style={{display: show ? "block" : "none" }}><img className="loadingGIF" src={spinner} alt="loading..." /></div>
-                }
-                {
-                    filteredPosts.length === 0 && <p>Nothing found for {searchString}</p>
+                    filteredPosts.length === 0 && <p>Nothing found</p>
                 }
             </div>
-        </div>
+            <form className="form-layout" onSubmit={handleSubmit(submitPost)}>
+                <h2>Submit a new post: </h2>
+                <br/>
+
+                <label htmlFor="text"> Text </label>
+                <input 
+                    {...register("text")}
+                    name="text"
+                    required/>
+
+        <input type="submit" value="Submit Post" />
+        <br/>
+                </form>
+            </div>
         </>
     )
 }

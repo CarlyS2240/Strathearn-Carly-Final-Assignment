@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.logout-btn{
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    margin-right: 30px;
+}

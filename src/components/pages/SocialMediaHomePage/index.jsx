@@ -2,6 +2,7 @@ import { useEffect, useState, useContext} from 'react';
 
 /* Importing the MovieItem component and the Header component to be displayed within the MoviesHomePage component */
 import { SocialMediaItem } from '../../SocialMediaItem';
+import { Header } from '../../Header';
 
 /* Importing the MoviesOrderContext*/
 
@@ -46,11 +47,14 @@ export const SocialMediaHomePage = () => {
     return (
         <>
         <div className="home-page">
+            <Header headerImage="https://images.pexels.com/photos/1187974/pexels-photo-1187974.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></Header>
+            <h1 className="sub-title">Good Afternoon,</h1>
+            <h1 className="title">Find out what your friends are listening to...</h1>
             <div className="posts-container">
                 { 
                 /* Mapping the fields from the API to the props that we are passing to the MovieItem component*/
                     posts.map((post) => (
-                        <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} text={post.text.stringValue} username={post.username.stringValue}></SocialMediaItem>
+                        <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} image={post.image.stringValue} text={post.text.stringValue} email={post.email.stringValue}></SocialMediaItem>
                     ))
                 }
                 {

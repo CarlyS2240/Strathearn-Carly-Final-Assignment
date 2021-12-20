@@ -11,10 +11,13 @@ export const Navbar = () => {
         <nav className="navbar">
             <ul className="navbar-list">
                 <li>
+                    <input className="search" type="text" placeholder="Search..."></input>
+                </li>
+                <li>
                     <NavLink exact={true} activeClassName="nav-selected" to="/">Home</NavLink>
                 </li>
                 <li>
-                    <NavLink activeClassName="nav-selected" to="/me">Me</NavLink>
+                    <NavLink activeClassName="nav-selected" to="/me">My Profile</NavLink>
                 </li>
                 <li>
                     <Logout/>

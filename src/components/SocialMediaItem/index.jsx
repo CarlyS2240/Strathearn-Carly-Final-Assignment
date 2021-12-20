@@ -7,13 +7,14 @@ import {Link} from 'react-router-dom'; /* Importing Link to route to the MovieDe
 
 
 export const SocialMediaItem = (props) => {
-    const {username, text} = props; /* Declaring props */
+    const {email, image, text} = props; /* Declaring props */
   
     /* Making the product card component from text, the Button component, and the Rating hook*/
 
     return (
         <div className="post">
-            <p className="post-username">{username}</p>
+            <p className="post-email">@{email}</p>
+            <img className="post-image" src={image}/>
             <p className="post-text">{text}</p>
         </div>
     )
