@@ -28,5 +28,5 @@ Open [http://localhost:3000/](http://localhost:3000/) to login to the website or
 
 Once you have logged in / signed up, click on "My Profile" to be routed to the "me" page where you can view your posts / post something new. 
 
-You can logout of the website by clicking "Logout" located in the navigation bar. 
+You can logout of the website by clicking the "Logout" button located in the navigation bar. 
 
