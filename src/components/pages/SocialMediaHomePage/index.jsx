@@ -1,4 +1,6 @@
 import { useEffect, useState} from 'react';  /*Importing useState, and useEffect*/
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; /*Importing auth to authenticate users*/
+import { useHistory } from 'react-router-dom'; /*Importing useHistory to push/route to other pages in the website*/
 
 /* Importing the SocialMediaItem component and the Header component */
 import { SocialMediaItem } from '../../SocialMediaItem';
@@ -14,6 +16,22 @@ export const SocialMediaHomePage = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true); /* Using in the loading state */
     const [show, setShow] = useState(true); /* Using to hide an overlay when the API has finished loading */
+
+    const history = useHistory();
+
+    
+      //Check if a current user is logged in
+      useEffect(
+        () => {
+            const auth = getAuth();
+            onAuthStateChanged(auth, (user) => {
+                if (!user){
+                    /*Pushing user to login page if they are not logged in*/
+                    history.push('/login');
+                }
+            })
+        }, []
+    );
     
     useEffect (
         () => {

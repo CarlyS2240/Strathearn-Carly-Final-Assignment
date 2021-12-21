@@ -40,7 +40,6 @@ export const Navbar = () => {
                     <input className="search" type="text" placeholder="Search..."></input>
                 </li>
                 
-                
                 <li>
                     <NavLink exact={true} activeClassName="nav-selected" to="/">Home</NavLink>
                 </li>
