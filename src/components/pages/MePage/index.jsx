@@ -156,7 +156,7 @@ export const MePage = () => {
                         <input className="post-image-input"
                             {...register("image")}
                             name="image"
-                            placeholder="Insert a link to a photo"
+                            placeholder="Insert a link to a photo of an album cover"
                             required/>
                             
                             <div className="submit-button-container">
@@ -166,6 +166,8 @@ export const MePage = () => {
                     <br/>
                     </form>
             </div>
+                <p className="post-title">My Posts</p>
+                <hr className="posts-break"></hr>
                 <div className="myPosts-container">
                     { 
                     /* Mapping the fields from the API to the props that we are passing to the MovieItem component*/
@@ -184,7 +186,7 @@ export const MePage = () => {
                         
                     }
                     {
-                        filteredPosts.length === 0 && <p>Nothing found</p>
+                        filteredPosts.length === 0 && <p className="noPosts-paragraph">You don't have any posts yet!</p>
                     }
                 </div>
                 </div>

@@ -103,3 +103,32 @@
     border-radius: 25px;
     transition: all 0.2s ease;
 }
+
+.noPosts-paragraph{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding-top: 5%;
+    padding-bottom: 1%;
+    color: #414141;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.post-title{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding-top: 2%;
+    color: #414141;
+    margin-left: 2.5%;
+}
+
+.posts-break{
+    width: 94.5%;
+    margin-left: 2.5%;
+    margin-top: 1.8%;
+    border: 1px solid rgb(235, 235, 235);
+}
+
