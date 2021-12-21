@@ -7,6 +7,7 @@ export const Header = (props) => {
 
     const {headerImage} = props; /* Declaring props */
 
+    /*Adding a logo and a header image for the website*/
     return (
         <>
             <div className="logo">GROOVE</div>
@@ -17,8 +18,10 @@ export const Header = (props) => {
     )
 }
 
-/* Header component takes a parameter for the following: the headerImage and paragraphText displayed in the component so that the featured movie can easily be swapped out*/
+/* Header component takes a parameter for the header image to be able to change it easily if need be*/
 
 Header.propTypes = {
+    
+    /*Defining the Props*/
     headerImage: PropTypes.string
 }

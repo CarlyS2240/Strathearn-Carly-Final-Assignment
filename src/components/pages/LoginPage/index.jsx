@@ -1,17 +1,16 @@
-import {useState} from 'react';
-import {useForm} from 'react-hook-form';
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-import { useHistory } from 'react-router-dom';
+import {useState} from 'react'; /*Importing useState*/
+import {useForm} from 'react-hook-form'; /*Importing useForm to create a form*/
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'; /*Importing auth to authenticate users*/
+import { useHistory } from 'react-router-dom'; /*Importing useHistory to push/route to other pages in the website*/
 
-import './styles.css';
+import './styles.css'; /*Linking stylesheet*/
 
 export const LoginPage = () => {
     const [mode, setMode] = useState("login");
-
     const{register, handleSubmit} = useForm();
-
     const history = useHistory();
 
+    /*Handling a user login by getting the formVals from the login form and pushing the user to the homepage after login*/
     const loginUser = async(formVals) => {
         try {
             console.log("Login Submitted", formVals)
@@ -26,6 +25,7 @@ export const LoginPage = () => {
         }
     }
 
+    /*Handling a user sign up by getting the formVals from the sign up form and pushing the user to the homepage after sign up*/
     const signUpUser = async(formVals) => {
         console.log("Sign Up Submitted", formVals)
         const auth = getAuth();
@@ -39,6 +39,7 @@ export const LoginPage = () => {
         }
     }
     
+    /*Creating a two-in-one form that contains functionality for user login and sign up (using modes)*/
     return (
          <div className="posts-page">
             { mode === "login" && (
@@ -65,15 +66,15 @@ export const LoginPage = () => {
             { mode === "signup" && (
                 <form className="signIn-form-layout" onSubmit={handleSubmit(signUpUser)}>
                     <h1 className="login-logo">GROOVE</h1>
-                    <h2 className="form-title">Create a new account now!</h2>
+                    <h2 className="form-title">Create a new account for Groove now!</h2>
                     <br/>
-                    <label className="form-label" htmlFor="user">Email</label>
+                    <label className="form-label" htmlFor="user">Email*</label>
                     <input className="form-input" type="email" required name="user" {...register('user')}/>
 
-                    <label className="form-label" htmlFor="passwordConfirm">Password</label>
+                    <label className="form-label" htmlFor="passwordConfirm">Password*</label>
                     <input className="form-input" type="password" name="password" required {...register('password')}/>
 
-                    <label className="form-label" htmlFor="password">Confirm Password</label>
+                    <label className="form-label" htmlFor="password">Confirm Password*</label>
                     <input className="form-input" type="password" name="passwordConfirm" required {...register('passwordConfirm')}/>
                     
                     <div className="form-button-container">

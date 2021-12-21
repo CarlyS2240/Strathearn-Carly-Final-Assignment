@@ -10,7 +10,6 @@
     background: rgb(255, 255, 255);
     box-shadow: 0 3px 3px -1px rgba(0,0,0,.05);
     font-size: 1rem;
-    
   }
   .navbar li {
     margin: 1rem;
@@ -32,9 +31,7 @@
   .navbar-user {
     font-size: 0.8rem;
   }
-
   .search{
-
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
@@ -56,4 +53,4 @@
       list-style-type: none;
       justify-content: flex-end;
     }
-  }
+}

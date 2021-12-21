@@ -1,17 +1,19 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; /*Importing auth to authenticate users*/
+import { useEffect, useState, useContext } from 'react'; /*Importing useState, useEffect, and useContext*/
+import { useHistory } from 'react-router-dom'; /*Importing useHistory to push/route to other pages in the website*/
+import { useForm } from 'react-hook-form'  /*Importing useForm to create a form*/
 
-import PostsOrderContext from "../../../context/postsOrderContext";
+import PostsOrderContext from "../../../context/postsOrderContext"; /* Importing the PostsOrderContext*/
 
-/* Importing the MovieItem component and the Header component to be displayed within the MoviesHomePage component */
+/* Importing the SocialMediaItem containing the posts from the API to be displayed on the homepage and the me page */
 import { SocialMediaItem } from '../../SocialMediaItem';
 
+/* Importing a spinner for the loading state*/
 import spinner from '../../../../src/spinner.gif'
 
-import "./styles.css"
+import "./styles.css" /*Linking stylesheet*/
 
+/*Asking a user to confirm that they would like to refresh the page prior to a refresh*/
 window.onbeforeunload = function () {return false;}
 
 export const MePage = () => {
@@ -19,8 +21,7 @@ export const MePage = () => {
     const history = useHistory();
 
     const [ posts, setPosts ] = useState([]);
-    const[ filteredPosts, setFilteredPosts ] = useState([]);
-    const [ email, setEmail ] = useState('');
+    const[ filteredPosts, setFilteredPosts ] = useState([]); /*Used for filtering the posts*/
     const [loading, setLoading] = useState(true); /* Using in the loading state */
     const [show, setShow] = useState(true); /* Using to hide an overlay when the API has finished loading */
 
@@ -30,8 +31,7 @@ export const MePage = () => {
 
     const auth = getAuth();
 
-
-      //Check if a current user is logged into firebase
+      //Check if a current user is logged in
       useEffect(
         () => {
             const auth = getAuth();
@@ -57,37 +57,27 @@ export const MePage = () => {
 
     const handlePostsByEmail = () => {
 
-        //setSearchString(auth.currentUser.email);
-        //console.log("setSearchString", auth.currentUser.email);
-
+        /*Setting user to the current user*/
         const user = getAuth().currentUser;
-        console.log("User", user);
 
-           if (user!=null){
-            console.log("im working", posts)
-                //setEmail(auth.currentUser.email);
-                //console.log("User Email", auth.currentUser.email);
-            
+           if (user!=null){ /*checking to see if the user is not null*/
+            /*If the user is not null, filter the posts in the database that contain that user's email (only show those posts*/ 
              const postsFiltered = posts.filter(
                     (post) => post.email.stringValue === user.email
              )
             setFilteredPosts(postsFiltered);
-            console.log("postsFiltered", postsFiltered);
-  
          }
     }
 
     const getPosts = async() => {
-        /* Getting our data from the API that was created to store data about movies*/ 
+        /* Getting our data from the API that was created to store data about music*/ 
         try {
             const response = await fetch('https://firestore.googleapis.com/v1/projects/social-media-api-itec-4012/databases/(default)/documents/posts');
             const data = await response.json();
-            //console.log(data);
             const formattedData = data.documents.map( (item) => {
                 return item.fields
             });
 
-            //console.log (formattedData);
             setPosts(formattedData);
             setFilteredPosts(formattedData);
             globalState.initializePosts(formattedData);  
@@ -100,13 +90,13 @@ export const MePage = () => {
 
     }
 
+    /*Functionality for submitting a new post*/
     const submitPost = async (formVals) => {
         const user = getAuth().currentUser;
-        const id = Math.floor(Math.random()*90000) + 10000;
+        const id = Math.floor(Math.random()*90000) + 10000; /*Creating a random id for new posts*/
         const idStr = id.toString();
-
-        console.log(idStr);
         
+        /*Formatting data to be inserted in the database*/
         const formattedData = {
             fields: {
                 email: {
@@ -124,7 +114,7 @@ export const MePage = () => {
             }
         }
 
-        console.log(formVals, formattedData);
+        /*inserting new post in the firebase database*/
         try{
             const response = await fetch('https://firestore.googleapis.com/v1/projects/social-media-api-itec-4012/databases/(default)/documents/posts',
             {
@@ -139,6 +129,8 @@ export const MePage = () => {
             console.log("Error", error);
         }
     };
+
+    /*Creating a form to allow users to create a new post and displaying the logged in user's posts underneath*/
 
     return (
         <>  
@@ -176,16 +168,9 @@ export const MePage = () => {
                 <hr className="posts-break"></hr>
                 <div className="myPosts-container">
                     { 
-                    /* Mapping the fields from the API to the props that we are passing to the MovieItem component*/
+                    /* Mapping the fields from the API to the props that we are passing to the SocialMediaItem component*/
                         filteredPosts.map((post) => (
                             <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} text={post.text.stringValue} email={post.email.stringValue} image={post.image.stringValue}></SocialMediaItem>
-                                //<>
-                                    //<br/>
-                                    ///<div>{post.id.stringValue}</div>
-                                // <div>{post.email.stringValue}</div>
-                                    //<div>{post.text.stringValue}</div>
-                                //</>
-                            
                         ))
                     }
                     {

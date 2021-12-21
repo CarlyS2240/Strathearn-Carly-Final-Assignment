@@ -17,7 +17,6 @@
     margin-left:2%;
     margin-right:2%;
     margin-top:2%;
-    
 }
 
 .headerImage{
@@ -29,15 +28,3 @@
     display: absolute;
     border-radius: 15px;
 }
-
-
-
-
-  /*----------Responsive Design For Desktop---------*/
-
-@media only screen and (min-width: 1629px) {
-
-     
-
-}
-

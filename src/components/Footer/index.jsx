@@ -1,11 +1,11 @@
-import "./styles.css"
-import {Link} from 'react-router-dom'; /*Importing Link to route to the MovieDetailsPage from the footer on the homepage*/
+import "./styles.css" /*Linking the styles sheet*/
+
+import {Link} from 'react-router-dom'; /*Importing Link to route to different pages in the website*/
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta> /* Used to add breakpoints to website for responsive design */
 
-
- /* Making the Footer component from list, button, and heading elements. The footer also uses Links to provide a quick link to the MovieDetailsPage from the homepage.*/
-
+ 
+/* Making the Footer component from text and links. The footer also uses Links to provide a quick link to the homepage and Me page.*/
 export const Footer = () => {
     return (
         <>

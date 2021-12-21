@@ -1,3 +1,5 @@
+/* Making the post data from the API accessible across the app*/
+
 import React, {useState} from 'react';
 
 const PostsOrderContext = React.createContext({

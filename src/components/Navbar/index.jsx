@@ -1,38 +1,37 @@
+/* Importing Navlink to route to other pages in the website*/
 import {
     NavLink
 } from "react-router-dom";
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState, useContext } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; /* Importing auth so we can authenticate users*/
+import { useEffect, useState} from 'react'; /*Importing useEffect and useState*/
 
-import { Logout } from "../Logout"
+import { Logout } from "../Logout" /*Importing the Logout component*/
 
-import "./styles.css"
+import "./styles.css" /*Linking the stylesheet*/
 
 export const Navbar = () => {
 
+    /*Declaring useState to check if a user is logged into the website*/
     const [user, setUser] = useState(null);
 
-    const [show, setShow] = useState(true); 
-
-    const [showProfile, setShowProfile] = useState(true); 
-
+    /*Checking to see if a user is logged into the website so we only show certain items in the navigation bar*/
     useEffect(
         () => {
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
                 if (user) {
+                    /*Set the user to true if a user is logged in*/
                     setUser(true);
-                    setShow(false);
-                    setShowProfile(true);
                 } else {
+                    /*Set the user to false if a user is not logged in*/
                     setUser(false);
-                    setShow(true);
-                    setShowProfile(false);
                 }
             })
         }, []
     )
+    
+    /*Creating the navigation bar component from links and a non-functional search bar*/
 
     return (
         <nav className="navbar">

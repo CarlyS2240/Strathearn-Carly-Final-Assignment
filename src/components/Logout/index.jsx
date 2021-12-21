@@ -1,11 +1,13 @@
-import { getAuth, onAuthStateChanged, signOut} from 'firebase/auth';
-import { useEffect, useState} from 'react';
-import './styles.css';
+import { getAuth, onAuthStateChanged, signOut} from 'firebase/auth'; /* Importing auth so we can authenticate users*/
+import { useEffect, useState} from 'react'; /*Importing useEffect and useState*/
+import './styles.css'; /*Linking stylesheet*/
+
 
 export const Logout = () => {
 
     const [user, setUser] = useState(null);
 
+    /*Checking to see if a user is logged in*/
     useEffect(
         () => {
             const auth = getAuth();
@@ -19,6 +21,7 @@ export const Logout = () => {
         }, []
     )
 
+    /*functionality for signing a user out of the website*/
     const logoutUser = async() => {
         const auth = getAuth();
         try{
@@ -29,6 +32,7 @@ export const Logout = () => {
         }
     }
 
+    /*Creating the logout button component*/
     return(
         user && <button className="logout-btn" onClick={logoutUser}>
             Logout
