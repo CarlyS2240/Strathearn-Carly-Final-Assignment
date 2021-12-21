@@ -8,7 +8,11 @@ import PostsOrderContext from "../../../context/postsOrderContext";
 /* Importing the MovieItem component and the Header component to be displayed within the MoviesHomePage component */
 import { SocialMediaItem } from '../../SocialMediaItem';
 
+import spinner from '../../../../src/spinner.gif'
+
 import "./styles.css"
+
+window.onbeforeunload = function () {return false;}
 
 export const MePage = () => {
 
@@ -17,6 +21,8 @@ export const MePage = () => {
     const [ posts, setPosts ] = useState([]);
     const[ filteredPosts, setFilteredPosts ] = useState([]);
     const [ email, setEmail ] = useState('');
+    const [loading, setLoading] = useState(true); /* Using in the loading state */
+    const [show, setShow] = useState(true); /* Using to hide an overlay when the API has finished loading */
 
     const globalState = useContext(PostsOrderContext);
 
@@ -85,7 +91,7 @@ export const MePage = () => {
             setPosts(formattedData);
             setFilteredPosts(formattedData);
             globalState.initializePosts(formattedData);  
-            //setShow(false); /* Hiding the loading overlay when the API has finished loading*/
+            setShow(false); /* Hiding the loading overlay when the API has finished loading*/
             
 
         }catch(err) {
@@ -183,7 +189,7 @@ export const MePage = () => {
                         ))
                     }
                     {
-                        
+                        loading && <div className="loadOverlay" style={{display: show ? "block" : "none" }}><img className="loadingGIF" src={spinner} alt="loading..." /></div>
                     }
                     {
                         filteredPosts.length === 0 && <p className="noPosts-paragraph">You don't have any posts yet!</p>

@@ -3,18 +3,16 @@ import { useEffect, useState, useContext} from 'react';
 /* Importing the MovieItem component and the Header component to be displayed within the MoviesHomePage component */
 import { SocialMediaItem } from '../../SocialMediaItem';
 import { Header } from '../../Header';
-
-/* Importing the MoviesOrderContext*/
-
-//import MoviesOrderContext from '../../../context/moviesOrderContext';
-
 import "./styles.css"
+
+/* Importing a spinner for the loading state*/
+import spinner from '../../../../src/spinner.gif'
 
 export const SocialMediaHomePage = () => {
 
     const [posts, setPosts] = useState([]);
-    //const [loading, setLoading] = useState(true); /* Using in the loading state */
-    //const [show, setShow] = useState(true); /* Using to hide an overlay when the API has finished loading */
+    const [loading, setLoading] = useState(true); /* Using in the loading state */
+    const [show, setShow] = useState(true); /* Using to hide an overlay when the API has finished loading */
     //const globalState = useContext(PostsOrderContext);
     
     useEffect (
@@ -36,7 +34,7 @@ export const SocialMediaHomePage = () => {
             console.log (formattedData);
             setPosts(formattedData);
             //globalState.initializePosts(formattedData);  
-            //setShow(false); /* Hiding the loading overlay when the API has finished loading*/
+            setShow(false); /* Hiding the loading overlay when the API has finished loading*/
             
 
         }catch(err) {
@@ -62,7 +60,7 @@ export const SocialMediaHomePage = () => {
                 }
 
                 {
-                    //loading && <div className="loadOverlay" style={{display: show ? "block" : "none" }}><img className="loadingGIF" src={spinner} alt="loading..." /></div>
+                    loading && <div className="loadOverlay" style={{display: show ? "block" : "none" }}><img className="loadingGIF" src={spinner} alt="loading..." /></div>
                 }
             </div>
         </div>
