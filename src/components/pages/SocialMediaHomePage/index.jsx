@@ -48,7 +48,7 @@ export const SocialMediaHomePage = () => {
         <>
         <div className="home-page">
             <Header headerImage="https://images.pexels.com/photos/1187974/pexels-photo-1187974.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></Header>
-            <h1 className="sub-title">Good Afternoon,</h1>
+            <h1 className="sub-title">Hi there,</h1>
             <h1 className="title">Find out what your friends are listening to...</h1>
             <div className="posts-container">
                 { 

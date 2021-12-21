@@ -20,22 +20,21 @@
     text-decoration: none;
     color: #414141;
     font-weight: 400;
-    
   }
   .navbar a.nav-selected {
     font-weight: 700;
     color: rgb(14, 14, 14);
   }
   .navbar a:hover {
-    color: black;
-    font-weight: 600;
+    border-bottom: 2px solid #414141;
+    color: #414141;
   }
   .navbar-user {
     font-size: 0.8rem;
   }
 
   .search{
- 
+
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;

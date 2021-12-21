@@ -42,7 +42,7 @@ export const LoginPage = () => {
     return (
          <div className="posts-page">
             { mode === "login" && (
-                <form className="form-layout" onSubmit={handleSubmit(loginUser)}>
+                <form className="signIn-form-layout" onSubmit={handleSubmit(loginUser)}>
                     <h2>Welcome back, please sign in!</h2>
                     <br/>
                     <label htmlFor="user">Username</label>

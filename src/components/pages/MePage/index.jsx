@@ -8,6 +8,8 @@ import PostsOrderContext from "../../../context/postsOrderContext";
 /* Importing the MovieItem component and the Header component to be displayed within the MoviesHomePage component */
 import { SocialMediaItem } from '../../SocialMediaItem';
 
+import "./styles.css"
+
 export const MePage = () => {
 
     const history = useHistory();
@@ -110,6 +112,9 @@ export const MePage = () => {
                 text: {
                     stringValue: formVals.text
                 },
+                image: {
+                    stringValue: formVals.image
+                },
             }
         }
 
@@ -132,42 +137,57 @@ export const MePage = () => {
     return (
         <>  
        <div className="me-page">
-        <div>{auth.currentUser.email}</div>
-            <div className="myPosts-container">
-                { 
-                /* Mapping the fields from the API to the props that we are passing to the MovieItem component*/
-                    filteredPosts.map((post) => (
-                        <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} text={post.text.stringValue} email={post.email.stringValue} image={post.image.stringValue}></SocialMediaItem>
-                            //<>
-                                //<br/>
-                                ///<div>{post.id.stringValue}</div>
-                               // <div>{post.email.stringValue}</div>
-                                //<div>{post.text.stringValue}</div>
-                            //</>
+            <div className="heading">Welcome Back,</div>
+            <div className="user">{auth.currentUser.email}</div>
+            <hr className="break"></hr>
+            <div className="form-container">
+                <form className="form-layout" onSubmit={handleSubmit(submitPost)}>
+                    <h2 className="submit-title">Let Your Friends Know What You've Been Listening To</h2>
+                    <br/>
+                    <div className="text-container">
+                        <label htmlFor="text"></label>
+                        <input className="post-input"
+                            {...register("text")}
+                            name="text"
+                            placeholder="What are you listening to?"
+                            required/>
+                    </div>
+                    <div className="photo-container">
+                        <input className="post-image-input"
+                            {...register("image")}
+                            name="image"
+                            placeholder="Insert a link to a photo"
+                            required/>
+                            
+                            <div className="submit-button-container">
+                                <input className="submit-button" type="submit" value="Submit Post" />
+                            </div>
+                    </div>
+                    <br/>
+                    </form>
+            </div>
+                <div className="myPosts-container">
+                    { 
+                    /* Mapping the fields from the API to the props that we are passing to the MovieItem component*/
+                        filteredPosts.map((post) => (
+                            <SocialMediaItem key={post.id.stringValue} id={post.id.stringValue} text={post.text.stringValue} email={post.email.stringValue} image={post.image.stringValue}></SocialMediaItem>
+                                //<>
+                                    //<br/>
+                                    ///<div>{post.id.stringValue}</div>
+                                // <div>{post.email.stringValue}</div>
+                                    //<div>{post.text.stringValue}</div>
+                                //</>
+                            
+                        ))
+                    }
+                    {
                         
-                    ))
-                }
-                {
-                    
-                }
-                {
-                    filteredPosts.length === 0 && <p>Nothing found</p>
-                }
-            </div>
-            <form className="form-layout" onSubmit={handleSubmit(submitPost)}>
-                <h2>Submit a new post: </h2>
-                <br/>
-
-                <label htmlFor="text"> Text </label>
-                <input 
-                    {...register("text")}
-                    name="text"
-                    required/>
-
-        <input type="submit" value="Submit Post" />
-        <br/>
-                </form>
-            </div>
+                    }
+                    {
+                        filteredPosts.length === 0 && <p>Nothing found</p>
+                    }
+                </div>
+                </div>
         </>
     )
 }

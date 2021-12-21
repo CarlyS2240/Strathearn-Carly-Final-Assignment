@@ -19,8 +19,8 @@
 .title {
     font-family: 'Nunito', sans-serif;
     padding-left: 2.5%;
-    padding-top: 0.5%;
     color: #414141;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
+    padding-top: 8px;
 }
